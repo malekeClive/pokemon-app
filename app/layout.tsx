@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Press_Start_2P as FontPressStart } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+import { cn } from "@/lib/utils";
+import Provider from "@/components/provider";
+import { Toaster } from "@/components/ui/sonner";
+
+const fontPress = FontPressStart({
+  weight: "400",
+  subsets: ["cyrillic"],
+  variable: "--font-press",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,7 +24,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          "min-h-screen bg-background font-press antialiased",
+          fontPress.variable
+        )}
+      >
+        <Provider>{children}</Provider>
+        <Toaster richColors />
+      </body>
     </html>
   );
 }
